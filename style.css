@@ -1,0 +1,79 @@
+@import url('https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@300&family=Raleway:wght@300&display=swap');
+/* font-family: 'Hanken Grotesk', sans-serif; */
+/* font-family: 'Raleway', sans-serif; */
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: aliceblue;
+}
+
+nav {
+    font-family: 'Hanken Grotesk', sans-serif;
+}
+
+nav ul {
+    display: flex;
+    align-items: center;
+    list-style-type: none;
+    height: 70px;
+    background-color: black;
+    color: aliceblue;
+}
+
+nav ul li {
+    padding: 0 5px;
+    margin: 0 25px;
+    /* font-weight: bolder; */
+}
+
+.brand img {
+    width: 50px;
+    border-radius: 50px;
+    padding: 0 2px;
+}
+
+.brand {
+    display: flex;
+    align-items: center;
+    padding: 0 5px;
+    font-size: 22px;
+    font-weight: bolder;
+}
+.bottom{
+    height: 100px;
+    position: sticky;
+    bottom: 0;
+    background-color: black;
+    color: aliceblue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.icons{
+    margin: 15px 0;
+}
+.icons i{
+    margin: 0 35px;
+    cursor: pointer;
+}
+
+.container{
+    height: 100vh;
+    background-color: black;
+    color: white;
+    font-family: 'Raleway', sans-serif;
+    margin: 25px auto;
+    border-radius: 10px;
+    width: 75%;
+    padding: 10px;
+    background-image: url(bg.jpg);
+    background-size: 100% 100%;
+}
+#myProgressBar{
+    width:95vw;
+}
