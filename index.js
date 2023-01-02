@@ -4,26 +4,26 @@ let songIndex = 0;
 let audioElem = new Audio('Warsaw.mp3');
 let masterPlay = document.getElementById('masterPlay');
 let myProgressBar = document.getElementById('myProgressBar');
-let songList= Array.from(document.getElementsByClassName('songItem'));
+let songList = Array.from(document.getElementsByClassName('songItem'));
 // audio list array
 let songs = [
-    { songName: 'Blank Space', filePath: 'Blank Space.mp3', coverPath: 'Blank Space.jpg' },
-    { songName: 'Gangsta`s Paradise', filePath: 'Gangsta Paradise.mp3', coverPath: 'Gangsta Paradise.jfif' },
-    { songName: 'Hall of Fame', filePath: 'Hall of Fame.mp3', coverPath: 'Hall of Fame.jpg' },
-    { songName: 'Immortals', filePath: 'Immortals.mp3', coverPath: 'Immortals.jpg' },
-    { songName: 'Let me love you', filePath: 'Let me love you.mp3', coverPath: 'Let me love you.jpg' },
-    { songName: 'Memories', filePath: 'Memories.mp3', coverPath: 'Memories.jpg' },
-    { songName: 'Something Just Like This', filePath: 'Something Just Like This.mp3', coverPath: 'Something Just Like This.jpg' },
-    { songName: 'Story of my life', filePath: 'Story of my life.mp3', coverPath: 'Story of my life.jpg' },
-    { songName: 'Battlefield Warsaw', filePath: 'Warsaw.mp3', coverPath: 'Warsaw.jpg' },
-    { songName: 'Whatever it takes', filePath: 'Whatever it takes.mp3', coverPath: 'Whatever it takes.jpg' },
-    { songName: 'Blank Space', filePath: 'Blank Space.mp3', coverPath: 'Blank Space.jpg' }
+    { songName: 'Blank Space', filePath: '1.mp3', coverPath: '1.jpg' },
+    { songName: 'Gangsta`s Paradise', filePath: '2.mp3', coverPath: '2.jfif' },
+    { songName: 'Hall of Fame', filePath: '3.mp3', coverPath: '3.jpg' },
+    { songName: 'Immortals', filePath: '4.mp3', coverPath: '4.jpg' },
+    { songName: 'Let me love you', filePath: '5.mp3', coverPath: '5.jpg' },
+    { songName: 'Memories', filePath: '6.mp3', coverPath: '6.jpg' },
+    { songName: 'Something Just Like This', filePath: '7.mp3', coverPath: '7.jpg' },
+    { songName: 'Story of my life', filePath: ' 8.mp3', coverPath: ' 8.jpg' },
+    { songName: 'Battlefield Warsaw', filePath: '9.mp3', coverPath: '9.jpg' },
+    { songName: 'Whatever it takes', filePath: ' 10.mp3', coverPath: ' 10.jpg' },
+    { songName: 'Blank Space', filePath: '1.mp3', coverPath: '1.jpg' }
 ]
 
-songList.forEach((element,i )=> {
-    console.log(songs[i].coverPath)
+songList.forEach((element, i) => {
+    // console.log(songs[i].coverPath)
     element.getElementsByClassName('albumArt')[0].src = songs[i].coverPath;
-    element.getElementsByClassName('songName')[0].innerText=songs[i].songName;
+    element.getElementsByClassName('songName')[0].innerText = songs[i].songName;
     // element.getElementsByClassName('timeStamp')[0].innerText=songs[i].duration;
 });
 
@@ -34,27 +34,89 @@ masterPlay.addEventListener('click', () => {
         audioElem.play();
         masterPlay.classList.remove('fa-play');
         masterPlay.classList.add('fa-pause');
-        document.getElementById('gif').style.opacity=1;
-        console.log('play');
+        document.getElementById('gif').style.opacity = 1;
+        // console.log('play');
     }
     else {
         audioElem.pause();
         masterPlay.classList.remove('fa-pause');
         masterPlay.classList.add('fa-play');
-        document.getElementById('gif').style.opacity=0;
-        console.log('paused');
+        document.getElementById('gif').style.opacity = 0;
+        // console.log('paused');
     }
 
 });
 
 // seekbar
-audioElem.addEventListener('timeupdate',()=>{
-console.log('timeupdate')
-progress= ((audioElem.currentTime/audioElem.duration)*100);
-myProgressBar.value=progress;
+audioElem.addEventListener('timeupdate', () => {
+    // console.log('timeupdate')
+    progress = ((audioElem.currentTime / audioElem.duration) * 100);
+    myProgressBar.value = progress;
 });
 
-myProgressBar.addEventListener('change',()=>{
-    audioElem.currentTime=myProgressBar.value*audioElem.duration/100;
+myProgressBar.addEventListener('change', () => {
+    audioElem.currentTime = myProgressBar.value * audioElem.duration / 100;
 });
 // document.getElementById('img').img.src="Memories.jpg";
+
+const songPlay = (element) => {
+    Array.from(document.getElementsByClassName('playSong')).forEach((element) => {
+    element.classList.remove('fa-pause')
+    element.classList.add('fa-play')
+    document.getElementById('gif').style.opacity = 0;
+    })
+}
+
+Array.from(document.getElementsByClassName('playSong')).forEach((element) => {
+    element.addEventListener('click', (e) => {
+        // console.log(e.target)
+        songPlay();
+        songIndex= parseInt(e.target.id)
+        e.target.classList.remove('fa-play');
+        e.target.classList.add('fa-pause');
+        audioElem.src=`${songIndex}.mp3`
+        audioElem.play();
+        audioElem.currentTime = 0;
+        masterPlay.classList.remove('fa-play');
+        masterPlay.classList.add('fa-pause');
+        document.getElementById('gif').style.opacity = 1;
+        document.getElementById('masterSong').innerText = songs[songIndex-1].songName;
+    })
+})
+document.getElementById('next').addEventListener('click',()=>{
+    if(songIndex>9)
+    {
+        songIndex=0;
+    }
+    else
+    {
+        songIndex += 1;
+        audioElem.src=`${songIndex}.mp3`
+        document.getElementById('masterSong').innerText = songs[songIndex-1].songName;
+        audioElem.play();
+        audioElem.currentTime = 0;
+        masterPlay.classList.remove('fa-play');
+        masterPlay.classList.add('fa-pause');
+        document.getElementById('gif').style.opacity = 1;
+    }
+})
+
+document.getElementById('back').addEventListener('click',()=>{
+    if(songIndex<=0)
+    {
+        songIndex=0;
+    }
+    else
+    {
+        songIndex -= 1;
+        audioElem.src=`${songIndex}.mp3`
+        document.getElementById('masterSong').innerText = songs[songIndex-1].songName;
+        audioElem.play();
+        audioElem.currentTime = 0;
+        masterPlay.classList.remove('fa-play');
+        masterPlay.classList.add('fa-pause');
+        document.getElementById('gif').style.opacity = 1;
+    }
+})
+
+
