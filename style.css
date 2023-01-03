@@ -92,8 +92,9 @@ nav ul li {
     margin: 15px;
 }
 #myProgressBar{
-    width: 90vw;
+    width: 80vw;
     cursor: pointer;
+    margin: 2px;
 }
 
 .songItem i,h5{
@@ -133,4 +134,9 @@ nav ul li {
 .songInfo img{
     opacity: 0;
     transition: opacity 0.1s ease-in;
+}
+.time{
+    font-family: 'Hanken Grotesk', sans-serif;
+    display: flex;
+    align-items: center;
 }
